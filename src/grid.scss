@@ -1,0 +1,61 @@
+/* Responsive Grid
+
+A customisable, yet responsible, responsive CSS grid built in SCSS.
+
+@usage:
+```
+    <h2>2 columns</h2>
+    <div class="grid">
+        <div class="g-col g-col__6-12"> 50% </div>
+        <div class="g-col g-col__6-12"> 50% </div>
+    </div>
+```
+
+The maths...
+    c => column width
+    g => gutter width
+    n => number of columns => $columns
+
+    W => max-width => 100%
+
+    W = n*c + (n-1)*g
+*/
+$columns: 12;
+$gutter: 2.5%; // .5rem @ 320px
+$breakpoints: 320, 480, 768, 960;
+
+$__single-column-width: ( ( 100% - ($gutter * ($columns - 1)) ) / $columns );
+$__smallest-breakpoint: min($breakpoints...);
+
+.grid {
+    display: block;
+
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.g-col {
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+
+    & + & {
+        margin-top: $gutter;
+    }
+}
+
+@media only screen and (min-width: #{$__smallest-breakpoint}px) {
+    .g-col + .g-col {
+        margin-top: 0;
+        margin-left: $gutter;
+    }
+
+    @for $col from 1 through $columns {
+        .g-col__#{$col}-#{$columns} {
+            width: ( $__single-column-width * $col ) + ( $gutter * ($col - 1) );
+        }
+    }
+}
