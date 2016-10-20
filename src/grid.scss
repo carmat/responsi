@@ -14,17 +14,18 @@ A customisable, yet responsible, responsive CSS grid built in SCSS.
 The maths...
     c => column width
     g => gutter width
-    n => number of columns => $columns
+    n => number of columns => $responsi-columns
 
     W => max-width => 100%
 
     W = n*c + (n-1)*g
 */
-$columns: 12;
-$gutter: 2.5%; // .5rem @ 320px
-$breakpoints: 480, 768, 960;
+$responsi-columns: 12 !default;
+$responsi-gutter: 2.5% !default; // .5rem @ 320px
+$breakpoints: 480, 768, 960 !default;
 
-$__single-column-width: ( ( 100% - ($gutter * ($columns - 1)) ) / $columns );
+// Private grid variables based on user-available variables
+$__single-column-width: ( ( 100% - ($responsi-gutter * ($responsi-columns - 1)) ) / $responsi-columns );
 $__smallest-breakpoint: min($breakpoints...);
 
 .grid {
@@ -43,19 +44,19 @@ $__smallest-breakpoint: min($breakpoints...);
     box-sizing: border-box;
 
     & + & {
-        margin-top: $gutter;
+        margin-top: $responsi-gutter;
     }
 }
 
 @media only screen and (min-width: #{$__smallest-breakpoint}px) {
     [class*="g-col__"] + [class*="g-col__"] {
         margin-top: 0;
-        margin-left: $gutter;
+        margin-left: $responsi-gutter;
     }
 
-    @for $col from 1 through $columns {
-        .g-col__#{$col}-#{$columns} {
-            width: ( $__single-column-width * $col ) + ( $gutter * ($col - 1) );
+    @for $col from 1 through $responsi-columns {
+        .g-col__#{$col}-#{$responsi-columns} {
+            width: ( $__single-column-width * $col ) + ( $responsi-gutter * ($col - 1) );
         }
     }
 }
