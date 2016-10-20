@@ -22,11 +22,11 @@ The maths...
 */
 $responsi-columns: 12 !default;
 $responsi-gutter: 2.5% !default; // .5rem @ 320px
-$breakpoints: 480, 768, 960 !default;
+$responsi-breakpoints: 480, 768, 960 !default;
 
 // Private grid variables based on user-available variables
 $__single-column-width: ( ( 100% - ($responsi-gutter * ($responsi-columns - 1)) ) / $responsi-columns );
-$__smallest-breakpoint: min($breakpoints...);
+$__smallest-breakpoint: min($responsi-breakpoints...);
 
 .grid {
     display: block;
