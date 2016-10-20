@@ -6,8 +6,8 @@ A customisable, yet responsible, responsive CSS grid built in SCSS.
 ```
     <h2>2 columns</h2>
     <div class="grid">
-        <div class="g-col g-col__6-12"> 50% </div>
-        <div class="g-col g-col__6-12"> 50% </div>
+        <div class="g-col__6-12"> 50% </div>
+        <div class="g-col__6-12"> 50% </div>
     </div>
 ```
 
@@ -37,7 +37,7 @@ $__smallest-breakpoint: min($breakpoints...);
     }
 }
 
-.g-col {
+[class*="g-col__"] {
     float: left;
     width: 100%;
     box-sizing: border-box;
@@ -48,7 +48,7 @@ $__smallest-breakpoint: min($breakpoints...);
 }
 
 @media only screen and (min-width: #{$__smallest-breakpoint}px) {
-    .g-col + .g-col {
+    [class*="g-col__"] + [class*="g-col__"] {
         margin-top: 0;
         margin-left: $gutter;
     }
